@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Akahai DOG RUN Event Calendar</title>
+    <!-- Import FullCalendar styles from CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css">
+    <!-- Custom styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <h1>Akahai DOG RUN Event Calendar</h1>
+    </header>
+    <main class="content">
+        <!-- Calendar container -->
+        <section class="calendar-section">
+            <div id="calendar"></div>
+            
+            <div class="calendar-hours">
+                営業時間：09:00〜19:00（最終受付18:00）
+            </div>
+
+            <div id="weather-widget" class="weather-widget">
+                天気情報を取得中...
+            </div>
+
+        </section>
+        <!-- This Week's Events -->
+<!-- This Week's Events -->
+<section class="week-events">
+    <h2>今週のイベント</h2>
+    <div id="week-events" class="event-cards"></div>
+</section>
+
+        <!-- Upcoming Events -->
+        <section class="upcoming-events">
+            <h2>今後の予定</h2>
+            <div class="upcoming-list">
+                <div class="upcoming-item">
+                    <div class="upcoming-date">
+                        <div class="month">4月</div>
+                        <div class="day">27</div>
+                    </div>
+                    <div class="upcoming-details">
+                        <h3>春のフェスティバル</h3>
+                        <p>花や音楽を楽しむ春のお祭りです。犬と一緒に参加可能！</p>
+                    </div>
+                </div>
+                <div class="upcoming-item">
+                    <div class="upcoming-date">
+                        <div class="month">5月</div>
+                        <div class="day">11</div>
+                    </div>
+                    <div class="upcoming-details">
+                        <h3>ビーチクリーンアップ</h3>
+                        <p>海岸の清掃活動を行います。犬も参加OK。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Event details modal (hidden by default) -->
+        <div id="event-modal" class="event-modal">
+            <div class="event-modal-content">
+                <button class="event-modal-close" aria-label="Close">&times;</button>
+                <h3 id="event-modal-title"></h3>
+                <p id="event-modal-desc"></p>
+            </div>
+        </div>
+    </main>
+    <!-- Import FullCalendar and initialise the calendar -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+
+    // FullCalendar 初期化
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        // 今日の月を表示
+        initialDate: new Date().toISOString().split('T')[0],
+        initialView: 'dayGridMonth',
+        locale: 'ja',
+        firstDay: 1,
+        height: 'auto',
+        headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: ''
+        },
+        events: [
+                // 定休日を年末休業前まで
+                {
+                    title: '定休日',
+                    daysOfWeek: [1],              // 毎週月曜
+                    endRecur: '2025-12-23',       // 12月23日以降は発生しない（22日まで有効）
+                    backgroundColor: '#e63946',
+                    borderColor:     '#e63946',
+                    textColor:       '#ffffff'
+                },
+                // 定休日を年末休業後から
+                {
+                    title: '定休日',
+                    daysOfWeek: [1],              // 毎週月曜
+                    startRecur: '2026-01-12',     // 1月12日（月）から再開
+                    backgroundColor: '#e63946',
+                    borderColor:     '#e63946',
+                    textColor:       '#ffffff'
+                },
+                // 年末休業（複数日イベント）
+                {
+                    title: '年末休業',
+                    start: '2025-12-29',
+                    end:   '2026-01-07',          // 翌日の7日を指定することで6日まで表示
+                    description: '年末年始の休業期間です。',
+                    backgroundColor: '#e63946',
+                    borderColor:     '#e63946',
+                    textColor:       '#ffffff'
+                },
+                // 以下はこれまでのイベントをそのまま並べます
+                {
+                    title: '芝養生日（定休日）',
+                    start: '2025-12-09',
+                    description: '芝育成日のため、定休とさせていただきます。',
+                    backgroundColor: '#28a745',
+                    borderColor:     '#28a745',
+                    textColor:       '#ffffff'
+                },
+                {
+                    title: 'ボールDAY',
+                    start: '2025-12-10',
+                    description: '終日：AKAHAIボールDAY',
+                    backgroundColor: '#ffffff', // 背景を白
+                    borderColor: '#ffffff',
+                    textColor: '#000000'       // 文字を黒
+                },
+                {
+                    title: 'ボールDAY',
+                    start: '2025-12-20',
+                    description: '終日：AKAHAIボールDAY',
+                    backgroundColor: '#ffffff', // 背景を白
+                    borderColor: '#ffffff',
+                    textColor: '#000000'       // 文字を黒
+                },
+                {
+                    title: 'サモエド&スピッツオフ会',
+                    start: '2025-12-21',
+                    description: '09:30〜14:30 犬種別オフ会となります。',
+                    backgroundColor: '#ffffff', // 背景を白
+                    borderColor: '#ffffff',
+                    textColor: '#000000'       // 文字を黒
+                },
+                {
+                    title: '芝養生日（定休日）',
+                    start: '2025-12-23',
+                    description: '芝育成日のため、定休とさせていただきます。',
+                    backgroundColor: '#28a745',
+                    borderColor:     '#28a745',
+                    textColor:       '#ffffff'
+                },
+                {
+                    title: 'ボールDAY',
+                    start: '2025-12-25',
+                    description: '終日：AKAHAIボールDAY',
+                    backgroundColor: '#ffffff', // 背景を白
+                    borderColor: '#ffffff',
+                    textColor: '#000000'       // 文字を黒
+
+                },
+                {
+                    title: '年内最終営業日',
+                    start: '2025-12-28',
+                    description: '2025年AKAHAI最後の営業日となります。',
+                    backgroundColor: '#ffffff', // 背景を白
+                    borderColor: '#ffffff',
+                    textColor: '#000000'       // 文字を黒
+                }
+        ],
+        // 日付範囲が変わったら「今週のイベント」を更新
+        datesSet: function() {
+            renderWeekEvents();
+        },
+        eventClick: function(info) {
+            info.jsEvent.preventDefault();
+            var modal = document.getElementById('event-modal');
+            var titleEl = document.getElementById('event-modal-title');
+            var descEl = document.getElementById('event-modal-desc');
+            titleEl.textContent = info.event.title;
+            descEl.textContent = info.event.extendedProps.description || '';
+            modal.classList.add('active');
+        }
+    });
+
+    // 今週のイベントを抽出して表示する関数
+    function renderWeekEvents() {
+        const events = calendar.getEvents();
+        const today = new Date();
+        today.setHours(0,0,0,0);
+        // 月曜日〜日曜日の範囲を算出
+        const dayIndex = today.getDay();
+        const monday = new Date(today);
+        monday.setDate(today.getDate() - ((dayIndex + 6) % 7));
+        const sunday = new Date(monday);
+        sunday.setDate(monday.getDate() + 6);
+
+        // この範囲にあるイベントを抽出
+        const weekEvents = events.filter(evt => {
+            const d = new Date(evt.start);
+            d.setHours(0,0,0,0);
+            return d >= monday && d <= sunday;
+        }).sort((a,b) => a.start - b.start);
+
+        // カードの挿入先
+        const container = document.getElementById('week-events');
+        if (!container) return;
+        container.innerHTML = '';
+        const weekdays = ['日','月','火','水','木','金','土'];
+
+        weekEvents.forEach(evt => {
+            const d = new Date(evt.start);
+            const card = document.createElement('div');
+            card.className = 'event-card';
+            card.innerHTML = `
+                <div class="event-date">${weekdays[d.getDay()]} <span>${d.getDate()}</span></div>
+                <div class="event-title">${evt.title}</div>
+                <div class="event-description">${evt.extendedProps?.description || ''}</div>
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    // カレンダー描画 & 初回の今週イベント描画
+    calendar.render();
+    renderWeekEvents();
+
+    // モーダルクローズ処理
+    var modalEl = document.getElementById('event-modal');
+    var closeBtn = modalEl.querySelector('.event-modal-close');
+    closeBtn.addEventListener('click', function() {
+        modalEl.classList.remove('active');
+    });
+    modalEl.addEventListener('click', function(e) {
+        if (e.target === modalEl) {
+            modalEl.classList.remove('active');
+        }
+    });
+});
+
+// ▼ 冬季限定で雪を降らせる
+const now = new Date();
+const winterMonths = [12, 1, 2]; // 12月〜2月を冬と定義
+if (winterMonths.includes(now.getMonth() + 1)) {
+  createSnow();
+}
+
+function createSnow() {
+  const container = document.createElement('div');
+  container.className = 'snow-container';
+  document.body.appendChild(container);
+
+  const flakeCount = 80; // 雪の粒の数を調整できます
+  for (let i = 0; i < flakeCount; i++) {
+    const flake = document.createElement('div');
+    flake.className = 'snowflake';
+    flake.style.left = Math.random() * 100 + 'vw';
+    flake.style.animationDuration = (5 + Math.random() * 5) + 's';
+    flake.style.animationDelay = Math.random() * 5 + 's';
+    flake.style.opacity = Math.random();
+    flake.style.width = flake.style.height = (4 + Math.random() * 6) + 'px';
+    container.appendChild(flake);
+  }
+}
+
+// ▼ 天気ウィジェット（町田市）＋背景エフェクト
+const API_KEY = "c8c4026c5327b6bc22bfe70dfe175303";
+const CITY_NAME = "Machida,jp";
+
+fetch(`https://api.openweathermap.org/data/2.5/weather?q=${CITY_NAME}&appid=${API_KEY}&units=metric&lang=ja`)
+  .then(response => response.json())
+  .then(data => {
+    const weather = data.weather[0].main.toLowerCase(); // 天気コード（例：clear, rain, clouds）
+    const weatherDesc = data.weather[0].description;
+    const temp = Math.round(data.main.temp);
+    const icon = data.weather[0].icon;
+    const iconUrl = `https://openweathermap.org/img/wn/${icon}.png`;
+
+    // ウィジェット描画
+    const widget = document.getElementById("weather-widget");
+    widget.innerHTML = `
+      <img src="${iconUrl}" alt="${weatherDesc}">
+      <span>今日の町田：${weatherDesc} ${temp}℃</span>
+    `;
+
+    // 背景エフェクト切替
+    if (weather.includes("clear")) {
+      createSunlightEffect();
+    } else if (weather.includes("rain")) {
+      createRainEffect();
+    }
+  })
+  .catch(() => {
+    document.getElementById("weather-widget").textContent = "天気情報を取得できませんでした。";
+  });
+
+// ☀️ 晴れエフェクト
+function createSunlightEffect() {
+  const sun = document.createElement('div');
+  sun.className = 'sunny-effect';
+  document.body.appendChild(sun);
+}
+
+// 🌧️ 雨エフェクト
+function createRainEffect() {
+  const container = document.createElement('div');
+  container.className = 'rain-container';
+  document.body.appendChild(container);
+
+  for (let i = 0; i < 60; i++) {
+    const drop = document.createElement('div');
+    drop.className = 'raindrop';
+    drop.style.left = Math.random() * 100 + 'vw';
+    drop.style.animationDuration = (0.6 + Math.random() * 0.8) + 's';
+    drop.style.animationDelay = Math.random() * 2 + 's';
+    container.appendChild(drop);
+  }
+}
+
+</script>
+
+</body>
+</html>

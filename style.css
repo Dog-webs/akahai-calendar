@@ -1,0 +1,402 @@
+/* Global styles */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', 'Hiragino Kaku Gothic Pro', sans-serif;
+    color: #fff;
+    background-image: url('images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.site-header {
+    text-align: center;
+    padding: 2rem 1rem;
+    backdrop-filter: blur(4px);
+    background: rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.site-header h1 {
+    font-size: 2.4rem;
+    margin: 0;
+    font-weight: 700;
+}
+
+.content {
+    flex: 1;
+    padding: 0 1rem 2rem;
+}
+
+/* Calendar section */
+.calendar-section {
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 1rem;
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+#calendar {
+    color: #333;
+    background: transparent;
+}
+
+/* Override FullCalendar default colors */
+.fc .fc-toolbar-title {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.fc-button {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: #fff;
+    padding: 0.4rem 0.8rem;
+    border-radius: 8px;
+    margin: 0 0.2rem;
+}
+.fc-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+.fc-daygrid-day-number {
+    color: #fff;
+}
+
+.fc-daygrid-day.fc-day-today {
+    background-color: rgba(255, 255, 255, 0.25);
+    border-radius: 50%;
+    padding: 4px;
+}
+
+/* Event appearance in the calendar */
+/* Use a light semi‑transparent background so event titles are visible inside each day cell */
+/* Event appearance in the calendar */
+/* Use a dark semi‑transparent background with white text for high contrast */
+/*
+ * Style for calendar events displayed inside the monthly grid. We choose a dark
+ * semi‑transparent background with light text for strong contrast on the
+ * pastel background. To ensure that long event titles (e.g., オビディエンスワークショップ)
+ * are fully readable instead of being truncated, we remove the default
+ * overflow hiding and allow wrapping within the event boxes. We also
+ * slightly reduce the font size and adjust line height so that text can
+ * wrap gracefully across multiple lines without overlapping.
+ */
+.fc-event {
+    background-color: rgba(0, 0, 0, 0.6);
+    border: none;
+    color: #fff;
+    font-weight: 600;
+    padding: 2px 4px;
+    border-radius: 4px;
+    /* reduce font size slightly so longer titles fit better */
+    font-size: 0.65rem;
+    margin: 0; /* remove extra margin for tight fit */
+    line-height: 1.1;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    /* allow events to grow vertically if needed */
+    overflow: visible;
+}
+
+/* Allow event titles to wrap across lines instead of being clipped */
+.fc-event-title,
+.fc-event-title-container {
+    white-space: normal !important;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+/* Increase the minimum height of each day cell in the month view. Without this,
+   the calendar restricts rows to a fixed height and long event titles can
+   still be truncated even when wrapping is enabled. By setting a larger
+   min-height on the day frame, we provide enough vertical space for
+   multi-line events. Adjust this value as needed based on the number and
+   length of events. */
+.fc-daygrid-day-frame {
+    min-height: 110px;
+}
+
+/* Styles for the event details modal */
+.event-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: none; /* hidden by default */
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.event-modal.active {
+    display: flex;
+}
+
+.event-modal-content {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(4px);
+    border-radius: 12px;
+    padding: 1.5rem;
+    max-width: 90%;
+    width: 320px;
+    color: #333;
+    text-align: left;
+    position: relative;
+}
+
+.event-modal-content h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.event-modal-content p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.event-modal-close {
+    position: absolute;
+    top: 0.2rem;
+    right: 0.5rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #666;
+    cursor: pointer;
+}
+.event-modal-close:hover {
+    color: #000;
+}
+
+/* Week events section */
+.week-events {
+    margin: 2rem auto;
+    max-width: 800px;
+    text-align: center;
+    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.week-events h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.event-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.event-card {
+    flex: 1 1 200px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 1rem;
+    color: #fff;
+    text-align: center;
+    backdrop-filter: blur(6px);
+    min-width: 180px;
+}
+
+.event-card .event-date {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.event-card .event-date span {
+    font-size: 2rem;
+    display: block;
+}
+
+.event-card .event-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+}
+
+.event-card .event-description {
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+/* Upcoming events */
+.upcoming-events {
+    margin: 2rem auto;
+    max-width: 800px;
+    backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.upcoming-events h2 {
+    font-size: 1.8rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.upcoming-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.upcoming-item {
+    display: flex;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 1rem;
+    color: #fff;
+    backdrop-filter: blur(6px);
+}
+
+.upcoming-date {
+    margin-right: 1rem;
+    text-align: center;
+    min-width: 60px;
+}
+
+.upcoming-date .month {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.upcoming-date .day {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.upcoming-details h3 {
+    margin: 0 0 0.3rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.upcoming-details p {
+    margin: 0;
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+@media (max-width: 600px) {
+    .event-cards {
+        flex-direction: column;
+        align-items: center;
+    }
+    .event-card {
+        max-width: 100%;
+    }
+    .upcoming-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .upcoming-date {
+        margin-bottom: 0.5rem;
+    }
+}
+/* 雪アニメーション用のコンテナ */
+.snow-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 9999; /* 既存要素の上に表示 */
+}
+
+.snowflake {
+  position: absolute;
+  top: -10px;
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  animation-name: fall;
+  animation-timing-function: linear;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh);
+  }
+}
+
+.calendar-hours {
+  margin-top: 10px;
+  text-align: left;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 8px 14px;
+  border-radius: 12px;
+  width: fit-content;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+}
+/* === 天気アニメーション === */
+
+/* ☀️ 晴れ：光が差し込むエフェクト */
+.sunny-effect {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: radial-gradient(circle at 30% 30%, rgba(255,255,200,0.3), transparent 70%);
+  animation: sunlight 6s ease-in-out infinite alternate;
+  z-index: 5;
+}
+
+@keyframes sunlight {
+  from { opacity: 0.3; transform: translateY(0px); }
+  to { opacity: 0.6; transform: translateY(-20px); }
+}
+
+/* 🌧️ 雨アニメーション */
+.rain-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 5;
+}
+
+.raindrop {
+  position: absolute;
+  width: 1px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.25);
+  animation: rainfall linear infinite;
+}
+
+@keyframes rainfall {
+  from { transform: translateY(-100px); }
+  to { transform: translateY(100vh); }
+}
+
+
