@@ -398,57 +398,55 @@ body {
   from { transform: translateY(-100px); }
   to { transform: translateY(100vh); }
 }
-
 /* =========================
-   📱 スマホ版：月間カレンダー調整
+   📱 スマホ版：超コンパクト月間カレンダー
    ========================= */
 @media (max-width: 768px) {
 
-  /* カレンダー全体 */
-  #calendar {
-    max-width: 100%;
-  }
-
-  /* 各日付セルの高さを固定 */
+  /* 1マスの高さをさらに低く */
   .fc .fc-daygrid-day {
-    height: 90px; /* ← ここでマスの高さを統一 */
+    height: 64px;
   }
 
-  /* 日付の中身を縦レイアウトに */
-  .fc .fc-daygrid-day-frame {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-
-  /* 日付番号 */
+  /* 日付番号を左上・小さめに */
   .fc .fc-daygrid-day-top {
-    justify-content: center;
-    font-size: 0.85rem;
-    padding: 2px 0;
-  }
-
-  /* イベント表示エリア */
-  .fc .fc-daygrid-day-events {
-    flex-grow: 1;
-    overflow-y: auto;     /* イベントが多い日はスクロール */
-    padding: 2px 0;
-  }
-
-  /* イベント1件の見た目 */
-  .fc .fc-daygrid-event {
-    font-size: 0.7rem;
+    justify-content: flex-start;
+    font-size: 0.75rem;
     padding: 2px 4px;
-    border-radius: 6px;
-    margin-bottom: 2px;
-    line-height: 1.2;
   }
 
-  /* 今日の日付を強調 */
+  /* イベントエリア */
+  .fc .fc-daygrid-day-events {
+    padding: 0 2px;
+    overflow: hidden; /* はみ出し禁止 */
+  }
+
+  /* イベントは1件だけ表示 */
+  .fc .fc-daygrid-event {
+    font-size: 0.65rem;
+    padding: 1px 3px;
+    border-radius: 4px;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* 2件目以降は表示しない */
+  .fc .fc-daygrid-day-events > :nth-child(n+2) {
+    display: none;
+  }
+
+  /* 「他◯件」も非表示 */
+  .fc .fc-daygrid-more-link {
+    display: none;
+  }
+
+  /* 今日をリングで強調（派手すぎない） */
   .fc .fc-day-today {
-    background: rgba(255, 140, 80, 0.15) !important;
+    background: transparent !important;
+    outline: 2px solid rgba(255, 150, 100, 0.6);
+    outline-offset: -2px;
+    border-radius: 6px;
   }
 }
-
-
-
