@@ -399,4 +399,56 @@ body {
   to { transform: translateY(100vh); }
 }
 
+/* =========================
+   📱 スマホ版：月間カレンダー調整
+   ========================= */
+@media (max-width: 768px) {
+
+  /* カレンダー全体 */
+  #calendar {
+    max-width: 100%;
+  }
+
+  /* 各日付セルの高さを固定 */
+  .fc .fc-daygrid-day {
+    height: 90px; /* ← ここでマスの高さを統一 */
+  }
+
+  /* 日付の中身を縦レイアウトに */
+  .fc .fc-daygrid-day-frame {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  /* 日付番号 */
+  .fc .fc-daygrid-day-top {
+    justify-content: center;
+    font-size: 0.85rem;
+    padding: 2px 0;
+  }
+
+  /* イベント表示エリア */
+  .fc .fc-daygrid-day-events {
+    flex-grow: 1;
+    overflow-y: auto;     /* イベントが多い日はスクロール */
+    padding: 2px 0;
+  }
+
+  /* イベント1件の見た目 */
+  .fc .fc-daygrid-event {
+    font-size: 0.7rem;
+    padding: 2px 4px;
+    border-radius: 6px;
+    margin-bottom: 2px;
+    line-height: 1.2;
+  }
+
+  /* 今日の日付を強調 */
+  .fc .fc-day-today {
+    background: rgba(255, 140, 80, 0.15) !important;
+  }
+}
+
+
 
