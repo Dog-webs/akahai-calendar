@@ -403,50 +403,99 @@ body {
    ========================= */
 @media (max-width: 768px) {
 
-  /* 1マスの高さをさらに低く */
-  .fc .fc-daygrid-day {
-    height: 64px;
-  }
-
-  /* 日付番号を左上・小さめに */
-  .fc .fc-daygrid-day-top {
-    justify-content: flex-start;
-    font-size: 0.75rem;
-    padding: 2px 4px;
-  }
-
-  /* イベントエリア */
-  .fc .fc-daygrid-day-events {
-    padding: 0 2px;
-    overflow: hidden; /* はみ出し禁止 */
-  }
-
-  /* イベントは1件だけ表示 */
-  .fc .fc-daygrid-event {
-    font-size: 0.65rem;
-    padding: 1px 3px;
-    border-radius: 4px;
-    line-height: 1.2;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  /* 2件目以降は表示しない */
-  .fc .fc-daygrid-day-events > :nth-child(n+2) {
-    display: none;
-  }
-
-  /* 「他◯件」も非表示 */
-  .fc .fc-daygrid-more-link {
-    display: none;
-  }
-
   /* 今日をリングで強調（派手すぎない） */
   .fc .fc-day-today {
     background: transparent !important;
     outline: 2px solid rgba(255, 150, 100, 0.6);
     outline-offset: -2px;
     border-radius: 6px;
+  }
+}
+/* ==== スマホ専用：ヘッダーとカレンダーの間に余白を追加 ==== */
+@media (max-width: 768px) {
+  .site-header {
+    margin-bottom: 40px; /* ← この値で隙間の大きさを調整（例：20px） */
+  }
+
+  .calendar-section {
+    margin-top: 10px;
+  }
+}
+/* ==== ヘッダーを丸みのあるガラスデザインに ==== */
+.site-header {
+  background: rgba(255, 255, 255, 0.18); /* 半透明ホワイト */
+  backdrop-filter: blur(10px) saturate(150%);
+  -webkit-backdrop-filter: blur(10px) saturate(150%);
+  border-radius: 20px; /* ← 丸み */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  padding: 20px 30px;
+  text-align: center;
+  color: #fff;
+  margin: 15px auto 0 auto;
+  width: 90%;
+  max-width: 800px;
+}
+
+/* スマホ版で少し丸みを強調 */
+@media (max-width: 768px) {
+  .site-header {
+    border-radius: 28px;
+    padding: 25px 20px;
+    margin-bottom: 20px;
+  }
+}
+/* ==== スマホ専用：ヘッダー上部の隙間をなくす ==== */
+@media (max-width: 768px) {
+  body {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  .site-header {
+    margin-top: 0 !important;   /* ← 上部の隙間を完全に削除 */
+    border-top-left-radius: 0;  /* 上の丸みを少し調整（好みで） */
+    border-top-right-radius: 0;
+  }
+}
+/* ==== 今週のイベント カードデザイン調整 ==== */
+.event-cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* 各カードを均一なサイズに */
+.event-card {
+  width: 85%;
+  min-height: 200px; /* ← 高さを固定して均一にする */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(10px);
+  border-radius: 25px;
+  padding: 20px;
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ホバー時アニメーション */
+.event-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 18px rgba(255, 255, 255, 0.3);
+}
+
+/* スマホ調整 */
+@media (max-width: 768px) {
+  .event-card {
+    width: 92%;
+    min-height: 180px; /* スマホ向けの最適値 */
+    padding: 18px 10px;
+    border-radius: 22px;
   }
 }
