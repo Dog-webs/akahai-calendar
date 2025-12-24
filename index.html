@@ -73,21 +73,41 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    var calendarEl = document.getElementById('calendar');
 
-    // FullCalendar 初期化
-    var calendar = new FullCalendar.Calendar(calendarEl, {
-        // 今日の月を表示
-        initialDate: new Date().toISOString().split('T')[0],
-        initialView: 'dayGridMonth',
-        locale: 'ja',
-        firstDay: 1,
-        height: 'auto',
-        headerToolbar: {
-            left: 'prev,next today',
-            center: 'title',
-            right: ''
-        },
+  var calendarEl = document.getElementById('calendar');
+
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+
+    /* ====== 基本設定 ====== */
+
+    // 初期表示：2025年12月
+    initialDate: '2025-12-01',
+
+    // 月間カレンダー
+    initialView: 'dayGridMonth',
+
+    // 日本語
+    locale: 'ja',
+
+    // 月曜始まり
+    firstDay: 1,
+
+    // 高さ自動
+    height: 'auto',
+
+    // ヘッダー
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: ''
+    },
+
+    /* ====== ★重要：表示可能な日付範囲 ====== */
+    // これを入れないと 2026年以降が描画されません
+    validRange: {
+      start: '2025-01-01',
+      end: '2027-01-01'
+    },
         events: [
                 // 定休日を年末休業前まで
                 {
@@ -151,14 +171,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     textColor: '#000000'       // 文字を黒
                 },
                 {
-                    title: '芝養生日（定休日）',
-                    start: '2025-12-23',
-                    description: '芝育成日のため、定休とさせていただきます。',
-                    backgroundColor: '#28a745',
-                    borderColor:     '#28a745',
-                    textColor:       '#ffffff'
-                },
-                {
                     title: '雨天臨時休業',
                     start: '2025-12-24',
                     description: '雨のため、お休みとさせていただきます。',
@@ -182,7 +194,47 @@ document.addEventListener('DOMContentLoaded', function() {
                     backgroundColor: '#ffffff', // 背景を白
                     borderColor: '#ffffff',
                     textColor: '#000000'       // 文字を黒
-                }
+                },
+                {
+                    title: '雑種犬オフ会',
+                    start: '2026-01-11',
+                    description: '09:30〜13:30 犬種別オフ会となります。',
+                    backgroundColor: '#ffffff', // 背景を白
+                    borderColor: '#ffffff',
+                    textColor: '#000000'       // 文字を黒
+                },
+                {
+                    title: 'オウシーオフ会',
+                    start: '2026-01-25',
+                    description: '09:30〜13:30 犬種別オフ会となります。',
+                    backgroundColor: '#ffffff', // 背景を白
+                    borderColor: '#ffffff',
+                    textColor: '#000000'       // 文字を黒
+                }, 
+                {
+                    title: 'ポメラニアンオフ会',
+                    start: '2026-02-08',
+                    description: '09:30〜13:30 犬種別オフ会となります。',
+                    backgroundColor: '#ffffff', // 背景を白
+                    borderColor: '#ffffff',
+                    textColor: '#000000'       // 文字を黒
+                },
+                {
+                    title: '柴犬オフ会',
+                    start: '2026-02-22',
+                    description: '09:30〜13:30 犬種別オフ会となります。',
+                    backgroundColor: '#ffffff', // 背景を白
+                    borderColor: '#ffffff',
+                    textColor: '#000000'       // 文字を黒
+                }, 
+                {
+                    title: 'バーニーズ&グレピオフ会',
+                    start: '2026-03-22',
+                    description: '09:30〜13:30 犬種別オフ会となります。',
+                    backgroundColor: '#ffffff', // 背景を白
+                    borderColor: '#ffffff',
+                    textColor: '#000000'       // 文字を黒
+                },
         ],
         // 日付範囲が変わったら「今週のイベント」を更新
         datesSet: function() {
