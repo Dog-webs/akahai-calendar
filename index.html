@@ -81,7 +81,9 @@ document.addEventListener('DOMContentLoaded', function() {
     /* ====== 基本設定 ====== */
 
     // 初期表示：2025年12月
-    initialDate: '2025-12-01',
+    // アクセスした「今日」を基準に表示
+    initialDate: new Date().toISOString().split('T')[0],
+
 
     // 月間カレンダー
     initialView: 'dayGridMonth',
