@@ -40,12 +40,12 @@
             <div class="upcoming-list">
                 <div class="upcoming-item">
                     <div class="upcoming-date">
-                        <div class="month">○月</div>
-                        <div class="day">○○日</div>
+                        <div class="month">3月</div>
+                        <div class="day">1日</div>
                     </div>
                     <div class="upcoming-details">
-                        <h3>現在準備中です。</h3>
-                        <p>coming soon</p>
+                        <h3>AKAHAI春のマルシェ</h3>
+                        <p>AKAHAI主催の春のマルシェです。</p>
                     </div>
                 </div>
                 <div class="upcoming-item">
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     /* ====== 基本設定 ====== */
 
-    // 初期表示：2025年12月
+    // 初期表示：
     // アクセスした「今日」を基準に表示
     initialDate: new Date().toISOString().split('T')[0],
 
@@ -245,6 +245,31 @@ document.addEventListener('DOMContentLoaded', function() {
                     borderColor: '#ffffff',
                     textColor: '#000000'       // 文字を黒
                 },
+                {
+                    title: 'AKAHAI Dog run2026年営業開始',
+                    start: '2026-01-07',
+                    description: '2026年最初の営業開始日となります。皆様のご来場心よりお待ちしております。',
+                    backgroundColor: '#ffffff', // 背景を白
+                    borderColor: '#ffffff',
+                    textColor: '#000000'       // 文字を黒
+                },
+                {
+                    title: '芝養生日（定休日）',
+                    start: '2026-02-03',
+                    description: '芝育成日のため、定休とさせていただきます。',
+                    backgroundColor: '#28a745',
+                    borderColor:     '#28a745',
+                    textColor:       '#ffffff'
+                },
+                {
+                    title: '芝養生日（定休日）',
+                    start: '2026-02-17',
+                    description: '芝育成日のため、定休とさせていただきます。',
+                    backgroundColor: '#28a745',
+                    borderColor:     '#28a745',
+                    textColor:       '#ffffff'
+                },
+                
         ],
         // 日付範囲が変わったら「今週のイベント」を更新
         datesSet: function() {
