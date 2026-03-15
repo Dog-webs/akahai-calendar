@@ -722,6 +722,31 @@ function createRainEffect() {
     container.appendChild(drop);
   }
 }
+// ▼ 春限定で桜を降らせる
+const now = new Date();
+const springMonths = [3, 4]; // 3月〜4月
+
+if (springMonths.includes(now.getMonth() + 1)) {
+  createSakura();
+}
+
+function createSakura() {
+  const container = document.createElement('div');
+  container.className = 'sakura-container';
+  document.body.appendChild(container);
+
+  const petalCount = 60; // 花びらの数
+  for (let i = 0; i < petalCount; i++) {
+    const petal = document.createElement('div');
+    petal.className = 'sakura-petal';
+    petal.style.left = Math.random() * 100 + 'vw';
+    petal.style.animationDuration = (6 + Math.random() * 6) + 's';
+    petal.style.animationDelay = Math.random() * 5 + 's';
+    petal.style.opacity = Math.random();
+    petal.style.width = petal.style.height = (8 + Math.random() * 8) + 'px';
+    container.appendChild(petal);
+  }
+}
 
 </script>
 
