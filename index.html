@@ -34,22 +34,12 @@
             <div class="upcoming-list">
                 <div class="upcoming-item">
                     <div class="upcoming-date">
-                        <div class="month">○月</div>
-                        <div class="day">○○日</div>
+                        <div class="month">3月</div>
+                        <div class="day">22日</div>
                     </div>
                     <div class="upcoming-details">
-                        <h3>現在準備中です。</h3>
-                        <p>coming soon</p>
-                    </div>
-                </div>
-                <div class="upcoming-item">
-                    <div class="upcoming-date">
-                        <div class="month">○月</div>
-                        <div class="day">○○日</div>
-                    </div>
-                    <div class="upcoming-details">
-                        <h3>現在準備中です。</h3>
-                        <p>coming soon</p>
+                        <h3>バーニーズ×グレピオフ会</h3>
+                        <p>バーニーズ×グレピオフ会　09:00〜13:30’</p>
                     </div>
                 </div>
             </div>
@@ -678,31 +668,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
-
-// ▼ 冬季限定で雪を降らせる
-const now = new Date();
-const winterMonths = [12, 1, 2]; // 12月〜2月を冬と定義
-if (winterMonths.includes(now.getMonth() + 1)) {
-  createSnow();
-}
-
-function createSnow() {
-  const container = document.createElement('div');
-  container.className = 'snow-container';
-  document.body.appendChild(container);
-
-  const flakeCount = 80; // 雪の粒の数を調整できます
-  for (let i = 0; i < flakeCount; i++) {
-    const flake = document.createElement('div');
-    flake.className = 'snowflake';
-    flake.style.left = Math.random() * 100 + 'vw';
-    flake.style.animationDuration = (5 + Math.random() * 5) + 's';
-    flake.style.animationDelay = Math.random() * 5 + 's';
-    flake.style.opacity = Math.random();
-    flake.style.width = flake.style.height = (4 + Math.random() * 6) + 'px';
-    container.appendChild(flake);
-  }
-}
 
 // ▼ 天気ウィジェット（町田市）＋背景エフェクト
 const API_KEY = "c8c4026c5327b6bc22bfe70dfe175303";
